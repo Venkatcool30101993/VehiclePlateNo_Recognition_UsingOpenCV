@@ -1,0 +1,32 @@
+// Language: C++
+// This program reads a color image and converts it to greyscale using OpenCV.
+
+#include <opencv2/opencv.hpp>
+#include <iostream>
+
+int main() {
+    // Read the input color image
+    cv::Mat colorImage = cv::imread("car.jpg");  // Replace with your image path
+    if (colorImage.empty()) {
+        std::cerr << "Error: Could not open or find the image!" << std::endl;
+        return -1;
+    }
+
+    // Create a matrix to store the greyscale image
+    cv::Mat greyImage;
+    
+    // Convert the color image to greyscale
+    cv::cvtColor(colorImage, greyImage, cv::COLOR_BGR2GRAY);
+
+    // Display the original and greyscale images
+    cv::imshow("Color Image", colorImage);
+    cv::imshow("Greyscale Image", greyImage);
+
+    // Save the greyscale image to a file
+    cv::imwrite("greyscale_output.jpg", greyImage);
+
+    // Wait for a key press indefinitely
+    cv::waitKey(0); 
+
+    return 0;
+}
